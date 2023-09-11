@@ -1,0 +1,15 @@
+{
+  "contacts": [
+    {
+      "id": "1",
+      "firstname": "Eduardo",
+      "lastname": "Pazitto",
+      "address": "Pordenone, Italia",
+      "company": "Intermek",
+      "email": "pazitto@email.com",
+      "telnumber1": "3331111616",
+      "telnumber2": "3332221616",
+      "note": "Test notes"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.title{
+    padding: 1em;
+    color: aliceblue;
+    background: #4bb3e0;
+}
