@@ -1,9 +1,11 @@
 import DataGrid, { Column, Editing, FormItem, Paging, Button } from "devextreme-react/data-grid"
 import 'devextreme-react/text-area'
 import { useState, useEffect } from "react"
+import Message from '../Message/Message'
 
 export default function ContactsTable () {
     const [contacts, setContacts] = useState([])
+    const [message, setMessage] = useState({})
 
     const notesEditorOptions = { height: 100 }
     const url = 'http://localhost:5000/contacts/'
@@ -31,7 +33,12 @@ export default function ContactsTable () {
             body: JSON.stringify(contactToBeAdded.data),
         })
         .then((resp) => resp.json())
-        .catch((err) => console.error(err))
+        .then(() => {
+            setMessage({message: 'Success! Contact added!', type: 'success'})
+        })
+        .catch((err) => {
+            setMessage({message: err, type: 'error'})
+        })
     }
 
     const handleRemoveContact = (contactToBeDeleted) => {
@@ -42,7 +49,12 @@ export default function ContactsTable () {
             },
         })
         .then((resp) => resp.json())
-        .catch((err) => console.error(err))
+        .then(() => {
+            setMessage({message: 'Success! Contact deleted!', type: 'success'})
+        })
+        .catch((err) => {
+            setMessage({message: err, type: 'error'})
+        })
     }
 
     const handleUpdateContact = (contactToBeEdited) => {
@@ -54,11 +66,17 @@ export default function ContactsTable () {
             body: JSON.stringify(contactToBeEdited.newData),
         })
         .then((resp) => resp.json())
-        .catch((err) => console.error(err))
+        .then(() => {
+            setMessage({message: 'Success! Contact updated!', type: 'success'})
+        })
+        .catch((err) => {
+            setMessage({message: err, type: 'error'})
+        })
     }
 
     return(
         <>
+            {message && <Message msg={message.message} type={message.type}/>}
             <DataGrid
                 dataSource={contacts}
                 keyExpr="id"
